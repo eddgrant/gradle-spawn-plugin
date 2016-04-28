@@ -38,4 +38,9 @@ Once the build draws to a close, the `stopServer` task is then used to gracefull
 ###PID File
 
 The `SpawnProcessTask` will automatically deposit a `.pid.lock` file in the working directory. This contains the PID of the running process.
-The `KillProcessTask` will read this lock file, kill the process gracefully, and remove the file.
+The `KillProcessTask` will read this lock file, kill the process gracefully, and remove the file. This task will fail if it is unable to find the `.pid.lock` file, unless configured with `strict = false` e.g.
+
+    task stopServer(type: KillProcessTask) {
+        strict false
+    }
+

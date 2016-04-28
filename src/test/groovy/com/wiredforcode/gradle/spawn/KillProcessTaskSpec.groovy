@@ -73,6 +73,21 @@ class KillProcessTaskSpec extends Specification {
         thrown GradleException
     }
 
+    void "should not explode if no pid file exists when not strict"() {
+        given:
+        def directoryPath = directory.toString()
+
+        and:
+        killTask.directory = directoryPath
+        killTask.strict = false
+
+        when:
+        killTask.kill()
+
+        then:
+        noExceptionThrown()
+    }
+
     void "should set current directory as default for directory field"() {
         given:
         killTask
